@@ -41,16 +41,12 @@ export default {
   data () {
     return {
       editedTodo: null,
-      newTodo: '',
-      loading: true
+      newTodo: ''
     }
   },
   firebase: {
     todos: {
-      source: todosRef,
-      readyCallback: function () {
-        this.loading = false
-      }
+      source: todosRef
     }
   },
   computed: {

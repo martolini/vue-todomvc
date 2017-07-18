@@ -74,11 +74,16 @@ export default {
         toastr.error('A todo shouldn\'t be empty...', 'Nothing to do?')
         return
       }
+      var cached = this.newTodo
+      this.newTodo = ''
       todosRef.push({
         title,
         completed: false
+      }).then(() => {
+      }).catch(err => {
+        this.newTodo = cached
+        toastr.error(err.message)
       })
-      this.newTodo = ''
     },
     removeTodo: function (todo) {
       todosRef.child(todo['.key']).remove()

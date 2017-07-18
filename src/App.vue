@@ -35,6 +35,9 @@
 
 <script>
 import firebase from 'firebase'
+import 'jquery'
+import toastr from 'toastr'
+toastr.options.preventDuplicates = true
 const todosRef = firebase.database().ref('todos')
 export default {
   name: 'app',
@@ -67,6 +70,10 @@ export default {
     },
     addTodo: function () {
       var title = this.newTodo.trim()
+      if (title.length === 0) {
+        toastr.error('A todo shouldn\'t be empty...', 'Nothing to do?')
+        return
+      }
       todosRef.push({
         title,
         completed: false
